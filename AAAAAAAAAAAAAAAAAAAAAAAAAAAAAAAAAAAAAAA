@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ex1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> numbers = Console.ReadLine().Split().Select(int.Parse).ToList();
+            List<int> sum = new List<int>();
+            bool flag = true;
+            foreach (var item in numbers)
+            {
+                if (item == 0)
+                {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag)
+            {
+                numbers.Add(0); 
+            }     
+            List<int> positive = new List<int>();
+            List<int> negative = new List<int>();
+            foreach (var item in numbers)
+            {
+                if (item > 0)
+                {
+                    positive.Add(item);
+                }
+                else if (item < 0)
+                {
+                    negative.Add(item);
+                }
+            }
+            for (int i = 0; i < positive.Count; i++)
+            {
+                for (int j = i; j < positive.Count; j++)
+                {
+                    if (positive[j] < positive[i])
+                    {
+                        int temp = positive[j];
+                        positive[j] = positive[i];
+                        positive[i] = temp;
+                    }
+                }
+            }
+            for (int i = 0; i < negative.Count; i++)
+            {
+                for (int j = i; j < negative.Count; j++)
+                {
+                    if (negative[j] > negative[i])
+                    {
+                        int temp = negative[j];
+                        negative[j] = negative[i];
+                        negative[i] = temp;
+                    }
+                }
+            }
+            for (int i = 1; i < Math.Min(positive.Count, negative.Count); i+=2)
+            {
+                Console.Write(negative[i] + " ");
+                Console.Write(positive[i] + " ");
+                sum.Add(positive[i] + negative[i]);
+            }
+            Console.WriteLine();
+            foreach (var item in sum)
+            {
+                Console.Write(item + " ");
+            }
+            Console.WriteLine();
+            Console.WriteLine("Min: " + sum.Min());
+        }
+    }
+}
+
