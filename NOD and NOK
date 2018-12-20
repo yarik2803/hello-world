@@ -1,0 +1,57 @@
+//Function 1 - recieves 2 numbers and returns NOK
+//Function 2 - recieves 2 numbers and returns NOD
+//Function 3 - recieves two numbers - NOK and NOD and returns NOK/NOD
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ex1
+{
+    class Program
+    {
+        static int GetNOK(int number1, int number2) 
+        {
+
+            for (int i = Math.Max(number1, number2); i <= number1 * number2; i++)
+            {
+                if (i % number1 == 0 && i % number2 == 0)
+                {
+                    return i;
+                }
+            }
+            return 1;
+
+        }
+
+        static int GetNOD(int number1, int number2)
+        {
+            for (int i = Math.Min(number1, number2); i > 0; i--)
+            {
+                if (number1 % i == 0 && number2 % i == 0)
+                {
+                    return i;
+                }
+            }
+            return 1;
+        }
+
+        static int Division(int nok, int nod)
+        {
+            return nok / nod;
+        }
+
+        static void Main(string[] args)
+        {
+            int number1 = int.Parse(Console.ReadLine());
+            int number2 = int.Parse(Console.ReadLine());
+            int nok = GetNOK(number1, number2);
+            int nod = GetNOD(number1, number2);
+            Console.WriteLine("NOK: " + nok);
+            Console.WriteLine("NOD: " + nod);
+            Console.WriteLine("Division: " + Division(nok, nod));
+        }
+    }
+}
